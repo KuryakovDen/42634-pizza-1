@@ -31,7 +31,7 @@
                 <label
                   class="dough__input"
                   :class="`dough__input--${value}`"
-                  v-for="{ id, name, description, value } in dough"
+                  v-for="{ id, name, description, value } in proposedDoughTypes"
                   :key="id"
                 >
                   <input
@@ -176,18 +176,23 @@
   </div>
 </template>
 <script>
-import user from "@/static/user.json";
 import pizza from "@/static/pizza.json";
-import misc from "@/static/misc.json";
+import doughTypes from "@/common/enums/doughTypes.js";
 
 export default {
   name: "Index",
   data() {
     return {
-      user,
       pizza,
-      misc,
     };
+  },
+  computed: {
+    proposedDoughTypes() {
+      return this.pizza.dough.map((doughItem) => ({
+        ...doughItem,
+        value: doughTypes[doughItem.name],
+      }));
+    },
   },
 };
 </script>
