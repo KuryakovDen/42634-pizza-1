@@ -110,10 +110,10 @@
                   <ul class="ingredients__list">
                     <li
                       class="ingredients__item"
-                      v-for="{ id, name, modifier } in ingredients"
+                      v-for="{ id, name, value } in ingredients"
                       :key="id"
                     >
-                      <span :class="`filling filling--${modifier}`">{{
+                      <span :class="`filling filling--${value}`">{{
                         name
                       }}</span>
 
@@ -178,6 +178,7 @@
 <script>
 import pizza from "@/static/pizza.json";
 import doughTypes from "@/common/enums/doughTypes.js";
+import ingridientTypes from "@/common/enums/ingridientTypes.js";
 
 export default {
   name: "Index",
@@ -191,6 +192,12 @@ export default {
       return this.pizza.dough.map((doughItem) => ({
         ...doughItem,
         value: doughTypes[doughItem.name],
+      }));
+    },
+    ingredients() {
+      return this.pizza.ingredients.map((ingredient) => ({
+        ...ingredient,
+        value: ingridientTypes[ingredient.name],
       }));
     },
   },
