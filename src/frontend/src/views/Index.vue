@@ -53,33 +53,18 @@
               <h2 class="title title--small sheet__title">Выберите размер</h2>
 
               <div class="sheet__content diameter">
-                <label class="diameter__input diameter__input--small">
+                <label
+                  v-for="{ id, name, value } in diameters"
+                  :class="`diameter__input diameter__input--${value}`"
+                  :key="id"
+                >
                   <input
                     type="radio"
                     name="diameter"
-                    value="small"
+                    :value="value"
                     class="visually-hidden"
                   />
-                  <span>23 см</span>
-                </label>
-                <label class="diameter__input diameter__input--normal">
-                  <input
-                    type="radio"
-                    name="diameter"
-                    value="normal"
-                    class="visually-hidden"
-                    checked
-                  />
-                  <span>32 см</span>
-                </label>
-                <label class="diameter__input diameter__input--big">
-                  <input
-                    type="radio"
-                    name="diameter"
-                    value="big"
-                    class="visually-hidden"
-                  />
-                  <span>45 см</span>
+                  <span>{{ name }}</span>
                 </label>
               </div>
             </div>
@@ -180,6 +165,7 @@ import pizza from "@/static/pizza.json";
 import doughTypes from "@/common/enums/doughTypes.js";
 import ingridientTypes from "@/common/enums/ingridientTypes.js";
 import sauceTypes from "@/common/enums/sauceTypes.js";
+import diameterTypes from "@/common/enums/diameterTypes.js";
 
 export default {
   name: "Index",
@@ -205,6 +191,12 @@ export default {
       return this.pizza.sauces.map((sauce) => ({
         ...sauce,
         value: sauceTypes[sauce.name],
+      }));
+    },
+    diameters() {
+      return this.pizza.sizes.map((size) => ({
+        ...size,
+        value: diameterTypes[size.name],
       }));
     },
   },
