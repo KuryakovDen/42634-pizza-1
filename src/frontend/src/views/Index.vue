@@ -179,6 +179,7 @@
 import pizza from "@/static/pizza.json";
 import doughTypes from "@/common/enums/doughTypes.js";
 import ingridientTypes from "@/common/enums/ingridientTypes.js";
+import sauceTypes from "@/common/enums/sauceTypes.js";
 
 export default {
   name: "Index",
@@ -198,6 +199,12 @@ export default {
       return this.pizza.ingredients.map((ingredient) => ({
         ...ingredient,
         value: ingridientTypes[ingredient.name],
+      }));
+    },
+    sauces() {
+      return this.pizza.sauces.map((sauce) => ({
+        ...sauce,
+        value: sauceTypes[sauce.name],
       }));
     },
   },
